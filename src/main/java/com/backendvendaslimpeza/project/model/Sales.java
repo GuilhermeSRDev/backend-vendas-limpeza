@@ -11,15 +11,16 @@ public class Sales {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, name = "id_sale")
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "sale_datetime")
     private Date saleDatetime;
 
     @Column(nullable = false)
     private char status;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "total_value")
     private float value;
 
 }
