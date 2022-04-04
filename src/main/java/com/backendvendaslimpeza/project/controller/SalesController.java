@@ -3,11 +3,13 @@ package com.backendvendaslimpeza.project.controller;
 import com.backendvendaslimpeza.project.model.Sales;
 import com.backendvendaslimpeza.project.repository.SalesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class SalesController {
 
@@ -15,8 +17,8 @@ public class SalesController {
     private SalesRepository saleRepository;
 
     @GetMapping(path = "/api/sales")
-    public List<Sales> getAllSales() {
-        return (List<Sales>) saleRepository.findAll();
+    public ResponseEntity getAllSales() {
+        return ResponseEntity.ok().body(saleRepository.findAll());
     }
 
     @GetMapping(path = "/api/sales/{id}")
@@ -27,29 +29,15 @@ public class SalesController {
     }
 
     @PostMapping(path = "/api/sales")
-    public Sales insertSale(@RequestBody Sales sale) {
-        return saleRepository.save(sale);
+    public ResponseEntity insertSale(@RequestBody Sales sale) {
+        saleRepository.save(sale);
+        return ResponseEntity.ok().build();
     }
-
-//    @PutMapping(path = "/api/sales/{id}")
-//    public Sales updateSale(@RequestBody Sales newSale, @PathVariable("id") Integer id) {
-//        return saleRepository.findById(id)
-//            .map(sale -> {
-//                sale.setValue(newSale.getValue());
-//                sale.setStatus(newSale.getStatus());
-//                sale.setSaleDatetime(newSale.getSaleDatetime());
-//                return saleRepository.save(sale);
-//            })
-//            .orElseGet(() -> {
-//                newSale.setId(id);
-//                return saleRepository.save(sale);
-//            });
-//    }
 
     @DeleteMapping(path = "/api/sales/{id}")
     public ResponseEntity deleteSale(@PathVariable("id") Integer id) {
         saleRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
 }

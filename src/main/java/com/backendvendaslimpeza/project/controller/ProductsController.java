@@ -5,12 +5,14 @@ import com.backendvendaslimpeza.project.repository.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ProductsController {
 
@@ -18,8 +20,8 @@ public class ProductsController {
     private ProductsRepository productRepository;
 
     @GetMapping(path = "/api/products")
-    public ResponseEntity<List<Products>> getAllSales() {
-        return new ResponseEntity<List<Products>>((List<Products>) productRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity getAllSales() {
+        return ResponseEntity.ok().body(productRepository.findAll());
     }
 
     @GetMapping(path = "/api/products/{id}")
