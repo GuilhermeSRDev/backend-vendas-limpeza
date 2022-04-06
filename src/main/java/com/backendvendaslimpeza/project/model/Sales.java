@@ -1,11 +1,14 @@
 package com.backendvendaslimpeza.project.model;
 
-import lombok.Data;
+import lombok.Setter;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-@Data
+@Setter
+@Getter
 @Entity(name = "sales")
 public class Sales {
 
@@ -23,4 +26,6 @@ public class Sales {
     @Column(nullable = false, name = "total_value")
     private float value;
 
+    @OneToMany(mappedBy = "sales", cascade = CascadeType.ALL)
+    private List<SalesItem> items;
 }
