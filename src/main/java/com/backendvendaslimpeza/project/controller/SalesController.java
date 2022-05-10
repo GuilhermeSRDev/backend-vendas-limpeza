@@ -3,11 +3,8 @@ package com.backendvendaslimpeza.project.controller;
 import com.backendvendaslimpeza.project.model.Sales;
 import com.backendvendaslimpeza.project.repository.SalesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -23,8 +20,9 @@ public class SalesController {
 
     @GetMapping(path = "/api/sales/{id}")
     public ResponseEntity getSaleById(@PathVariable("id") Integer id) {
-        return saleRepository.findById(id)
-            .map(record -> ResponseEntity.ok().body(record))
+        return saleRepository.findById(id).map(
+                record -> ResponseEntity.ok().body(record)
+                )
             .orElse(ResponseEntity.notFound().build());
     }
 
