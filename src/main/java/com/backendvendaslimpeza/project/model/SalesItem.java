@@ -24,4 +24,10 @@ public class SalesItem {
     @OneToOne
     @JoinColumn(name="id_product")
     private Products product;
+
+    @Column
+    private Integer quantity;
+
+    @Column
+    private Float amount;
 }
