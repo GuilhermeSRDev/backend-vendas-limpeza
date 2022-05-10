@@ -31,7 +31,21 @@ CREATE TABLE `salesitems` (
     REFERENCES `products` (`id_product`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-    
+
+ALTER TABLE `salesitems`
+ADD COLUMN `quantidade` INT UNSIGNED NOT NULL AFTER `id_product`,
+ADD COLUMN `valorTotal` DECIMAL(15,2) UNSIGNED NOT NULL AFTER `quantidade`;
+
+UPDATE `databasevendaslimpeza`.`salesitems` SET `quantidade` = '2' WHERE (`id_sales_items` = '1');
+DELETE FROM `databasevendaslimpeza`.`salesitems` WHERE (`id_sales_items` = '2');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `quantidade` = '3' WHERE (`id_sales_items` = '3');
+DELETE FROM `databasevendaslimpeza`.`salesitems` WHERE (`id_sales_items` = '4');
+DELETE FROM `databasevendaslimpeza`.`salesitems` WHERE (`id_sales_items` = '5');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `quantidade` = '2' WHERE (`id_sales_items` = '7');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `quantidade` = '1' WHERE (`id_sales_items` = '9');
+DELETE FROM `databasevendaslimpeza`.`salesitems` WHERE (`id_sales_items` = '8');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `quantidade` = '1' WHERE (`id_sales_items` = '10');
+
 INSERT INTO products (product_name, `value`) 
 VALUES 
 	("Álcool 70 1L", 8), 
@@ -43,3 +57,7 @@ VALUES
     ("Limpa Pisos de Madeira 750ml", 15), 
     ("Tira-Limo 520g", 6), 
     ("Desengordurante 500ml", 10);
+
+select * from sales;
+select * from salesitems;
+select * from products;
