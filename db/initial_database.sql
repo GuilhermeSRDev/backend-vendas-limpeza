@@ -33,18 +33,29 @@ CREATE TABLE `salesitems` (
     ON UPDATE NO ACTION);
 
 ALTER TABLE `salesitems`
-ADD COLUMN `quantidade` INT UNSIGNED NOT NULL AFTER `id_product`,
-ADD COLUMN `valorTotal` DECIMAL(15,2) UNSIGNED NOT NULL AFTER `quantidade`;
+ADD COLUMN `quantity` INT UNSIGNED NOT NULL AFTER `id_product`,
+ADD COLUMN `amount` DECIMAL(15,2) UNSIGNED NOT NULL AFTER `quantity`;
 
-UPDATE `databasevendaslimpeza`.`salesitems` SET `quantidade` = '2' WHERE (`id_sales_items` = '1');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `quantity` = '2' WHERE (`id_sales_items` = '1');
 DELETE FROM `databasevendaslimpeza`.`salesitems` WHERE (`id_sales_items` = '2');
-UPDATE `databasevendaslimpeza`.`salesitems` SET `quantidade` = '3' WHERE (`id_sales_items` = '3');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `quantity` = '3' WHERE (`id_sales_items` = '3');
 DELETE FROM `databasevendaslimpeza`.`salesitems` WHERE (`id_sales_items` = '4');
 DELETE FROM `databasevendaslimpeza`.`salesitems` WHERE (`id_sales_items` = '5');
-UPDATE `databasevendaslimpeza`.`salesitems` SET `quantidade` = '2' WHERE (`id_sales_items` = '7');
-UPDATE `databasevendaslimpeza`.`salesitems` SET `quantidade` = '1' WHERE (`id_sales_items` = '9');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `quantity` = '2' WHERE (`id_sales_items` = '7');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `quantity` = '1' WHERE (`id_sales_items` = '9');
 DELETE FROM `databasevendaslimpeza`.`salesitems` WHERE (`id_sales_items` = '8');
-UPDATE `databasevendaslimpeza`.`salesitems` SET `quantidade` = '1' WHERE (`id_sales_items` = '10');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `quantity` = '1' WHERE (`id_sales_items` = '10');
+
+UPDATE `databasevendaslimpeza`.`salesitems` SET `amount` = '13' WHERE (`id_sales_items` = '1');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `amount` = '45' WHERE (`id_sales_items` = '3');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `amount` = '16' WHERE (`id_sales_items` = '7');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `amount` = '2' WHERE (`id_sales_items` = '9');
+UPDATE `databasevendaslimpeza`.`salesitems` SET `amount` = '2.5' WHERE (`id_sales_items` = '10');
+
+ALTER TABLE `salesitems` 
+DROP COLUMN `quantidade`,
+DROP COLUMN `valorTotal`,
+DROP COLUMN `valorUnit`;
 
 INSERT INTO products (product_name, `value`) 
 VALUES 
