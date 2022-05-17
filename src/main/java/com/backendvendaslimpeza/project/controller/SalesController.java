@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @CrossOrigin
 @RestController
@@ -58,8 +59,20 @@ public class SalesController {
         return ResponseEntity.ok().build();
     }
     @DeleteMapping(path = "/api/sales/{id}")
-    public ResponseEntity deleteSale(@PathVariable("id") Integer id) {
-        saleRepository.deleteById(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity deleteSale(@PathVariable("id") String id) {
+        List<Sales> allSales = (List<Sales>) saleRepository.findAll();
+        AtomicBoolean found = new AtomicBoolean(false);
+        allSales.forEach(item -> {
+            if (item.getId().equals(id)) {
+                found.set(true);
+                saleRepository.delete(item);
+            }
+        });
+
+        if (!found.get()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok().build();
+        }
     }
 }
