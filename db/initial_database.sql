@@ -2,7 +2,7 @@ CREATE SCHEMA `databasevendaslimpeza`;
 use databasevendaslimpeza;
 
 CREATE TABLE `sales` (
-  `id_sale` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_sale` VARCHAR(255) NOT NULL AUTO_INCREMENT,
   `sale_datetime` DATETIME NOT NULL DEFAULT current_timestamp(),
   `total_value` DECIMAL(15,2) NOT NULL,
   `status` CHAR(1) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE `products` (
 
 CREATE TABLE `salesitems` (
   `id_sales_items` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_sale` INT UNSIGNED NOT NULL,
+  `id_sale` VARCHAR(255) NOT NULL,
   `id_product` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_sales_items`),
   INDEX `fk_idSales_idx` (`id_sale` ASC),

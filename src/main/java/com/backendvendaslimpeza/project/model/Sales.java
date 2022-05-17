@@ -11,21 +11,15 @@ import java.util.List;
 @Getter
 @Entity(name = "sales")
 public class Sales {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, name = "id_sale")
-    private Integer id;
-
-    @Column(nullable = false, name = "sale_datetime")
+    @Column(name = "id_sale")
+    private String id;
+    @Column(name = "sale_datetime")
     private Date saleDatetime;
-
-    @Column(nullable = false)
+    @Column
     private char status;
-
-    @Column(nullable = false, name = "total_value")
-    private float value;
-
+    @Column(name = "total_value")
+    private double value;
     @OneToMany(mappedBy = "sales", cascade = CascadeType.ALL)
     private List<SalesItem> items;
 }

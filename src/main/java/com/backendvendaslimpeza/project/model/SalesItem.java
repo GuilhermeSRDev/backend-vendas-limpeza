@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class SalesItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, name = "id_sales_items")
+    @Column(name = "id_sales_items")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,5 +29,5 @@ public class SalesItem {
     private Integer quantity;
 
     @Column
-    private Float amount;
+    private double amount;
 }
